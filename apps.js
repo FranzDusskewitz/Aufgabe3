@@ -11,7 +11,7 @@ app.use(express.static('public'));
 
 app.get('/form',(req,res)=>{
 
-    res.sendFile(__dirname + '/public/index.html');
+    res.sendFile(__dirname + '/index.html');
 
 })
 
