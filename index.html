@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bestellformular</title>
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  </head>
+ 
+  <body style="font-family: arial">
+	<form action="/formPost" method="post" class="form">
+		<b>Self-PHP</b><br>	
+		<label >Anzahl: </label>
+		<input id="self" name="self" type="number" min="0" value="0"/>	
+		<label id="preisSelf"> Preis: 0.00 €</label><br><br>
+
+		<b>PHP Referenz</b><br>	
+		<label >Anzahl: </label>
+		<input id="referenz" name="referenz" type="number" min="0" value="0"/>	
+		<label id="preisReferenz"> Preis: 0.00 €</label><br><br>
+
+		<b>PHP-Kochbuch</b><br>	
+		<label >Anzahl: </label>
+		<input id="kochbuch" name="kochbuch" type="number" min="0" value="0"/>
+		<label id="preisKochbuch"> Preis: 0.00 €</label><br><br>	
+		
+
+		<label for="question">Wie sind sie auf uns aufmerksam geworden?</label><br>
+		
+		
+
+		<select name="question" id="question">
+		  <option value="stamm">Ich bin Stammkunde</option>
+		  <option value="tv">TV Werbung</option>
+		  <option value="telefon">Telefonbuch</option>
+		  <option value="mund">Mundpropaganda</option>
+		</select> <br><br>
+
+		<label id="gesamtPreis" style="color:red">Gesamtpreis: 0.00€</label><br><br>
+		<input id="submit" type="submit" value="Anfrage abschicken!" disabled=true>
+	</form>
+	
+
+	<script>		
+		var preisSelf = 0;
+		var preisReferenz = 0;
+		var preisKochbuch = 0;
+		var gesamtpreis = 0;
+
+		const elemSelf  = document.getElementById("self");
+		elemSelf.addEventListener("change", (event) => {
+			var preis = (elemSelf.value*10)*1.07;
+			preisSelf = preis;
+			preis = preis.toFixed(2);
+			if (preis < 0){document.getElementById("preisSelf").style.color = "red";}
+			else {document.getElementById("preisSelf").style.color = "black";}
+			document.getElementById("preisSelf").innerHTML = " Preis: "+preis+" €";
+
+			gesamtpreis = preisKochbuch+preisSelf+preisReferenz;
+
+			if (gesamtpreis <= 0){document.getElementById("gesamtPreis").style.color = "red";document.getElementById('submit').disabled=true;}
+			else {document.getElementById("gesamtPreis").style.color = "black";document.getElementById('submit').disabled=false;}
+			document.getElementById("gesamtPreis").innerHTML = " Gesamtpreis: "+gesamtpreis.toFixed(2)+" €";
+		});
+
+		const elemReferenz  = document.getElementById("referenz");
+		elemReferenz.addEventListener("change", (event) => {
+			var preis = (elemReferenz.value*10)*1.07;
+			preisReferenz = preis;
+			preis = preis.toFixed(2);
+			if (preis < 0){document.getElementById("preisReferenz").style.color = "red";}
+			else {document.getElementById("preisReferenz").style.color = "black";}
+			document.getElementById("preisReferenz").innerHTML = " Preis: "+preis+" €";
+
+			gesamtpreis = preisKochbuch+preisSelf+preisReferenz;
+
+			if (gesamtpreis <= 0){document.getElementById("gesamtPreis").style.color = "red";document.getElementById('submit').disabled=true;}
+			else {document.getElementById("gesamtPreis").style.color = "black";document.getElementById('submit').disabled=false;}
+			document.getElementById("gesamtPreis").innerHTML = " Gesamtpreis: "+gesamtpreis.toFixed(2)+" €";
+		});
+
+		const elemKochbuch  = document.getElementById("kochbuch");
+		elemKochbuch.addEventListener("change", (event) => {
+			var preis = (elemKochbuch.value*10)*1.07;
+			preisKochbuch = preis;
+			preis = preis.toFixed(2);
+			if (preis < 0){document.getElementById("preisKochbuch").style.color = "red";}
+			else {document.getElementById("preisKochbuch").style.color = "black";}
+			document.getElementById("preisKochbuch").innerHTML = " Preis: "+preis+" €";
+
+			gesamtpreis = preisKochbuch+preisSelf+preisReferenz;
+
+			if (gesamtpreis <= 0){document.getElementById("gesamtPreis").style.color = "red";document.getElementById('submit').disabled=true;}
+			else {document.getElementById("gesamtPreis").style.color = "black";document.getElementById('submit').disabled=false;}
+			document.getElementById("gesamtPreis").innerHTML = " Gesamtpreis: "+gesamtpreis.toFixed(2)+" €";
+		});
+	</script>
+  </body>
+</html>
